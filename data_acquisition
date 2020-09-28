@@ -1,0 +1,244 @@
+# # Data Acquisition
+# 
+# ## Getting Data
+# 
+# ### The pandas Library
+#     Pandas is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language. https://pandas.pydata.org/
+# 
+#     Python with Pandas is used in a wide range of fields including academic and commercial domains including finance, economics, Statistics, analytics, etc.
+# 
+# #### Key Features of Pandas
+#     Fast and efficient DataFrame object with default and customized indexing.
+#     Tools for loading data into in-memory data objects from different file formats.
+#     Data alignment and integrated handling of missing data.
+#     Reshaping and pivoting of data sets.
+#     Label-based slicing, indexing and subsetting of large data sets.
+#     Columns from a data structure can be deleted or inserted.
+#     Group by data for aggregation and transformations.
+#     High performance merging and joining of data.
+#     Time Series functionality.
+# 
+# #### Usage
+#     To load the pandas package and start working with it, import the package. The community agreed alias for pandas is pd, so loading pandas as pd is assumed standard practice for all of the pandas documentation.
+# 
+# Import the package => import pandas as pd
+# 
+# #### Most common sources
+#     Tables in a text format such as .csv
+#     Spreadsheets (such as Excel or Google Sheets)
+#     Web services
+#     Databases
+#     
+# #### Reading a Local File
+#     Copy the file to a data folder. Not required, just makes working with many data files easier.
+#     Inspect the file (use a text editor or Excel) just to see what it contains read_csv()
+#     accidents_data = pd.read_csv("data/accidents.csv")
+#     
+# #### Exploring the Dataset
+#     In Python, we can print the variable - print(accidents_data)
+#     Even better, in Jupyter, a cell outputs its last returned value
+#         This will create a nicer output - accidents_data
+#     We can see that:
+#         Rows have numerical indices starting at 0 by default
+#         Columns have names taken from the first line in the .csv file
+#     Column names: accidents_data.columns
+#     Index values: accidents_data.index
+#     Dimensions: accidents_data.shape
+#     Format: (rows, columns)
+#     
+# #### Reading Data from Other Files
+#     pd.read_table() is the most general function.
+#     All others ( read_csv() csv(), read_fwf() fwf(), pd.read_excel(), etc.) just apply some settings.
+# 
+# #### Reading Data from Web Services
+#     Most commonly used: JSON and XML. Function: pd.read_json()
+#     
+# #### Reading Data from SQL
+#     Relational databases store data in tables.
+#         Very similar to the datasets we use
+#         First, install a library to connect to databases
+#         From the command line: conda install pyodbc
+#         Then, import the library and connect to the database
+#         import pyodbc
+#         conn = pyodbc.connect("DRIVER={SQL Server};...")
+#     Perform a query.
+#         customer_info = pd.read_sql("select * from Sales.Customer", conn)
+#         
+# #### Web Scraping
+#     Another method for getting data.
+#     
+# 
+# ### %matplotlib inline
+#     %matplotlib is a magic function in IPython. I'll quote the relevant documentation here for you to read for convenience:
+# 
+#     IPython has a set of predefined ‘magic functions’ that you can call with a command line style syntax. There are two kinds of magics, line-oriented and cell-oriented. Line magics are prefixed with the % character and work much like OS command-line calls: they get as an argument the rest of the line, where arguments are passed without parentheses or quotes. Lines magics can return results and can be used in the right hand side of an assignment. Cell magics are prefixed with a double %%, and they are functions that get as an argument not only the rest of the line, but also the lines below it in a separate argument.
+# 
+#     %matplotlib inline sets the backend of matplotlib to the 'inline' backend:
+# 
+#     With this backend, the output of plotting commands is displayed inline within frontends like the Jupyter notebook, directly below the code cell that produced it. The resulting plots will then also be stored in the notebook document.
+# 
+#     When using the 'inline' backend, your matplotlib graphs will be included in your notebook, next to the code. It may be worth also reading How to make IPython notebook matplotlib plot inline for reference on how to use it in your code. https://stackoverflow.com/questions/19410042/how-to-make-ipython-notebook-matplotlib-plot-inline
+# 
+#     If you want interactivity as well, you can use the nbagg backend with %matplotlib notebook (in IPython 3.x), as described here. https://stackoverflow.com/questions/19410042/how-to-make-ipython-notebook-matplotlib-plot-inline
+# 
+# ### The matplotlib library
+#     matplotlib.pyplot is a collection of functions that make matplotlib work like MATLAB. Each pyplot function makes some change to a figure: e.g., creates a figure, creates a plotting area in a figure, plots some lines in a plotting area, decorates the plot with labels, etc.
+# 
+#     In matplotlib.pyplot various states are preserved across function calls, so that it keeps track of things like the current figure and plotting area, and the plotting functions are directed to the current axes (please note that "axes" here and in most places in the documentation refers to the axes part of a figure and not the strict mathematical term for more than one axis).
+# 
+#     Note: the pyplot API is generally less-flexible than the object-oriented API. Most of the function calls you see here can also be called as methods from an Axes object. We recommend browsing the tutorials and examples to see how this works. https://matplotlib.org/tutorials/introductory/pyplot.html
+#     
+#     
+# ### The numpy library
+#     NumPy (Numerical Python) is an open source Python library that’s used in almost every field of science and engineering. It’s the universal standard for working with numerical data in Python, and it’s at the core of the scientific Python and PyData ecosystems. NumPy users include everyone from beginning coders to experienced researchers doing state-of-the-art scientific and industrial research and development. The NumPy API is used extensively in Pandas, SciPy, Matplotlib, scikit-learn, scikit-image and most other data science and scientific Python packages.
+# 
+#     The NumPy library contains multidimensional array and matrix data structures (you’ll find more information about this in later sections). It provides ndarray, a homogeneous n-dimensional array object, with methods to efficiently operate on it. NumPy can be used to perform a wide variety of mathematical operations on arrays. It adds powerful data structures to Python that guarantee efficient calculations with arrays and matrices and it supplies an enormous library of high-level mathematical functions that operate on these arrays and matrices. https://numpy.org/
+
+# In[1]:
+
+
+get_ipython().run_line_magic('matplotlib', 'inline')
+
+
+# In[2]:
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+# In[4]:
+
+
+accidents_data = pd.read_csv("/data/accidents.csv")
+accidents_data
+
+
+# In[5]:
+
+
+accidents_data.head()
+
+
+# In[6]:
+
+
+accidents_data.tail()
+
+
+# In[7]:
+
+
+type(accidents_data)
+
+
+# In[8]:
+
+
+accidents_data.dtypes
+
+
+# In[9]:
+
+
+accidents_data.index
+
+
+# In[10]:
+
+
+accidents_data.columns
+
+
+# In[11]:
+
+
+accidents_data.shape
+
+
+# In[12]:
+
+
+print(accidents_data)
+
+
+# ## Read from URL
+
+# In[14]:
+
+
+pd.read_fwf("http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data-original")
+
+
+# In[18]:
+
+
+mpg_data = pd.read_fwf("http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data-original", header= None)
+
+
+# In[19]:
+
+
+mpg_data
+
+
+# In[20]:
+
+
+mpg_data.columns = ['mpg', 'cylinders', 'displacement','horsepower' 'weight', 'acceleration', 'model_year','origin', 'car_name']
+
+
+# In[21]:
+
+
+mpg_data
+
+
+# In[22]:
+
+
+mpg_data.columns
+
+
+# ## Read Exel
+
+# In[23]:
+
+
+pd.read_excel(r"D:\CSV\green_trip\green_tripdata_2015-09.xls")
+
+
+# ## Read Web Services
+
+# In[10]:
+
+
+pd.read_json("https://openlibrary.org/api/books?bibkeys=ISBN:9780345354907,ISBN:0881847690,LCCN:2005041555,ISBN:0060957905&format=json", orient = "index")
+
+
+# In[25]:
+
+
+book_data = pd.read_json("https://openlibrary.org/api/books?bibkeys=ISBN:9780345354907,ISBN:0881847690,LCCN:2005041555,ISBN:0060957905&format=json", orient="index")
+
+
+# In[26]:
+
+
+book_data
+
+
+# ## Reading Data from SQL
+
+# In[27]:
+
+
+import pyodbc
+
+
+# In[ ]:
+
+
+# pyodbc.connect("DRIVER={SQL Server};Server=.;Database=...;Integrated Security=True")
+
